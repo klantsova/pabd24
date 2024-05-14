@@ -1,5 +1,4 @@
 """House price prediction service"""
-
 from flask import Flask, request
 from flask_cors import CORS
 

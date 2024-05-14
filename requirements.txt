@@ -6,3 +6,9 @@ scikit-learn
 pandas
 boto3
 python-dotenv
+PyGithub
+argparse
+jupyter
+matplotlib
+joblib
+requests
