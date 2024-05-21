@@ -13,4 +13,3 @@ jupyter
 matplotlib
 joblib
 requests
-unittest
