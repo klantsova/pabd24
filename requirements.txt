@@ -5,6 +5,7 @@ flask_httpauth
 cianparser
 scikit-learn
 pandas
+numpy
 boto3
 python-dotenv
 PyGithub
