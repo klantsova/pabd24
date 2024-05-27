@@ -183,30 +183,30 @@ scp .\.env user23@192.144.14.9:/home/user23/pabd24
 
 ```sh
 mkdir data/raw
-python .src\download_to_s3.py
+python src/download_to_s3.py
 ```
 
 ### 2. Предварительная обработка данных  
 
 ```sh
 mkdir data/proc
-python .src\preprocess_data.py
+python src/preprocess_data.py
 
-cat .log\preprocess_data.log # посмотреть лог
+cat log/preprocess_data.log # посмотреть лог
 ```
 
 ### 3. Обучение модели (и тестирование)
 
 ```sh
-python .src\train_model.py
+python src/train_model.py
 
-python .src\test_model.py
+python src/test_model.py
 ```
 
 ### 4. Запуск приложения flask 
 
 ```sh
-python .src\predict_app.py
+python src/predict_app.py
 ```
 
 ### 5. Использование сервиса через веб интерфейс 
