@@ -5,13 +5,8 @@ flask_httpauth
 cianparser
 scikit-learn
 pandas
-numpy
 boto3
 python-dotenv
 PyGithub
-argparse
 jupyter
 matplotlib
-joblib
-requests
-dvc[s3]
