@@ -3,7 +3,6 @@ import argparse
 import logging
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-#from sklearn.ensemble import RandomForestRegressor
 from joblib import dump
 
 logger = logging.getLogger(__name__)
@@ -18,7 +17,7 @@ MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
 def main(args):
     df_train = pd.read_csv(TRAIN_DATA)
-    x_train = df_train[['floor','floors_count','rooms_count','total_meters']]
+    x_train = df_train[['floor','floors_count','rooms_count','total_meters']].astype(float)
     y_train = df_train['price']
     model = LinearRegression()
     model.fit(x_train, y_train)
