@@ -69,36 +69,10 @@ def predict_web_serve():
     floors_count = int(in_data['floors_count'])
     rooms_count = int(in_data['rooms_count'])
     total_meters = float(in_data['total_meters'])
-    price_per_month = int(in_data(['price_per_month']))
-    commissions = int(in_data['commissions'])
-    author = in_data['author']
-    author_type = in_data['author_type']
-    url = in_data['url']
-    location = in_data['location']
-    deal_type = in_data['deal_type']
-    accommodation_type = in_data['accommodation_type']
-    district = in_data['district']
-    street = in_data['street']
-    house_number = in_data['house_number']
-    underground = in_data['underground']
-    residential_complex = in_data['residential_complex']
     price = predict([[floor,
                       floors_count,
                       rooms_count,
-                      total_meters,
-                      price_per_month,
-                      commissions,
-                      author,
-                      author_type,
-                      url,
-                      location,
-                      deal_type,
-                      accommodation_type,
-                      district,
-                      street,
-                      house_number,
-                      underground,
-                      residential_complex]])
+                      total_meters]])
     return {'price': price}
 
 
