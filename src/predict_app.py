@@ -7,7 +7,7 @@ from joblib import load
 from flask_httpauth import HTTPTokenAuth
 from flask import send_from_directory
 
-MODEL_SAVE_PATH = 'models/linear_regression_v01.joblib'
+MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
 app = Flask(__name__)
 CORS(app)
@@ -35,8 +35,7 @@ def predict(in_data: dict) -> int:
     :return: House price, RUB.
     :rtype: int
     """
-    area = float(in_data['area'])
-    price = model.predict([[area]])
+    price = model.predict(in_data)
     return int(price)
 
 
