@@ -5,7 +5,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
-from flask import send_from_directory
+import pandas as pd
 
 MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
@@ -36,35 +36,16 @@ def predict(in_data: dict) -> int:
     :rtype: int
     """
     in_data = request.get_json()
-    floor = int(in_data['floor'])
-    floors_count = int(in_data['floors_count'])
-    rooms_count = int(in_data['rooms_count'])
-    total_meters = float(in_data['total_meters'])
-    price = predict([[floor,
-                      floors_count,
-                      rooms_count,
-                      total_meters]])
+    data = pd.DataFrame(in_data, index=[0])
+    data[['total_meters', 'rooms_count', 'floor', 'floors_count']] = data[['total_meters', 'rooms_count', 'floor', 'floors_count']].astype(float)
+    price = predict(data)
     return int(price)
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(
-        os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.route("/")
 def home():
     return """
-    <html>
-    <head>
-    <link rel="shortcut icon" href="/favicon.ico">
-    </head>
-    <body>
     <h1>Housing price service.</h1> Use /predict endpoint
-    </body>
-    </html>
     """
 
 
