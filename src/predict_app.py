@@ -1,11 +1,9 @@
 """House price prediction service"""
-import os
 from dotenv import dotenv_values
 from flask import Flask, request
 from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
-import pandas as pd
 
 MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
@@ -35,10 +33,18 @@ def predict(in_data: dict) -> int:
     :return: House price, RUB.
     :rtype: int
     """
-    in_data = request.get_json()
-    data = pd.DataFrame(in_data, index=[0])
-    data = data[['total_meters', 'rooms_count', 'floor', 'floors_count']].astype(float)
-    price = model.predict(data)
+    total_meters = float(in_data['total_meters'])
+    floor = int(in_data['floor'])
+    floors_count = int(in_data['floors_count'])
+    first_floor = (floor == 1)
+    last_floor = (floor == floors_count)
+    rooms_count = nt(in_data['rooms_count'])
+    price = model.predict([[floor,
+                            floors_count,
+                            rooms_count,
+                            total_meters,
+                            first_floor,
+                            last_floor]])
     return int(price)
 
 
