@@ -4,7 +4,7 @@ import pandas as pd
 from joblib import load
 from sklearn.metrics import mean_absolute_error
 
-MODEL_SAVE_PATH = 'models/linear_regression_v01.joblib'
+MODEL_SAVE_PATH = 'models/linear_regression_ff_v01.joblib'
 TEST_DATA = 'data/proc/test.csv'
 
 logger = logging.getLogger(__name__)
@@ -16,12 +16,16 @@ logging.basicConfig(
 
 def main(args):
     df_test = pd.read_csv(TEST_DATA)
-    x_test = df_test[['total_meters']]
+    x_test = df_test[['total_meters',
+                      'first_floor',
+                      'last_floor',
+                      'floors_count',
+                      ]]
     y_test = df_test['price']
-    model = load(MODEL_SAVE_PATH)
+    model = load(args.model)
     y_pred = model.predict(x_test)
     mae = mean_absolute_error(y_pred, y_test)
-    logger.info(f'Test model {MODEL_SAVE_PATH} on {TEST_DATA}, MAE = {mae:.0f}')
+    logger.info(f'Test model {args.model} on {TEST_DATA}, MAE = {mae:.0f}')
 
 
 if __name__ == '__main__':
