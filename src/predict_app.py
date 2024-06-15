@@ -35,7 +35,15 @@ def predict(in_data: dict) -> int:
     :return: House price, RUB.
     :rtype: int
     """
-    price = model.predict(in_data)
+    in_data = request.get_json()
+    floor = int(in_data['floor'])
+    floors_count = int(in_data['floors_count'])
+    rooms_count = int(in_data['rooms_count'])
+    total_meters = float(in_data['total_meters'])
+    price = predict([[floor,
+                      floors_count,
+                      rooms_count,
+                      total_meters]])
     return int(price)
 
 
@@ -65,14 +73,7 @@ def home():
 def predict_web_serve():
     """Dummy service"""
     in_data = request.get_json()
-    floor = int(in_data['floor'])
-    floors_count = int(in_data['floors_count'])
-    rooms_count = int(in_data['rooms_count'])
-    total_meters = float(in_data['total_meters'])
-    price = predict([[floor,
-                      floors_count,
-                      rooms_count,
-                      total_meters]])
+    price = predict(in_data)
     return {'price': price}
 
 
