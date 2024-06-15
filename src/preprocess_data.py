@@ -23,16 +23,19 @@ PRICE_THRESHOLD = 100_000_000
 
 
 def main(args):
-    main_dataframe = pd.read_csv(args.input[0], delimiter=',')
+    main_dataframe = pd.read_csv(args.input[0], delimiter=';')
     for i in range(1, len(args.input)):
-        data = pd.read_csv(args.input[i], delimiter=',')
+        data = pd.read_csv(args.input[i], delimiter=';')
         df = pd.DataFrame(data)
         main_dataframe = pd.concat([main_dataframe, df], axis=0)
 
     main_dataframe['url_id'] = main_dataframe['url'].map(lambda x: x.split('/')[-2])
-    new_dataframe = main_dataframe.set_index('url_id')
-    #new_dataframe = main_dataframe[['url_id', 'total_meters', 'price']].set_index('url_id')
 
+    df = main_dataframe
+    df['first_floor'] = df['floor'] == 1
+    df['last_floor'] = df['floor'] == df['floors_count']
+
+    new_dataframe = df.set_index('url_id')
     new_df = new_dataframe[new_dataframe['price'] < PRICE_THRESHOLD]
     new_df = shuffle(new_df)
     border = int(args.split * len(new_df))
