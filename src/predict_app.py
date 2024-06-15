@@ -38,7 +38,7 @@ def predict(in_data: dict) -> int:
     in_data = request.get_json()
     data = pd.DataFrame(in_data, index=[0])
     data[['total_meters', 'rooms_count', 'floor', 'floors_count']] = data[['total_meters', 'rooms_count', 'floor', 'floors_count']].astype(float)
-    price = predict(data)
+    price = model.predict(data)
     return int(price)
 
 
