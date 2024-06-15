@@ -38,7 +38,7 @@ def predict(in_data: dict) -> int:
     floors_count = int(in_data['floors_count'])
     first_floor = (floor == 1)
     last_floor = (floor == floors_count)
-    rooms_count = nt(in_data['rooms_count'])
+    rooms_count = int(in_data['rooms_count'])
     price = model.predict([[floor,
                             floors_count,
                             rooms_count,
