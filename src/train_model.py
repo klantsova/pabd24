@@ -2,8 +2,8 @@
 import argparse
 import logging
 import pandas as pd
-#from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+#from sklearn.ensemble import RandomForestRegressor
 from joblib import dump
 
 logger = logging.getLogger(__name__)
@@ -20,7 +20,7 @@ def main(args):
     df_train = pd.read_csv(TRAIN_DATA)
     x_train = df_train[['floor','floors_count','rooms_count','total_meters']]
     y_train = df_train['price']
-    model = RandomForestRegressor(n_estimators=100, random_state=42)
+    model = LinearRegression()
     model.fit(x_train, y_train)
     dump(model, args.model)
     logger.info(f'Saved to {args.model}')
