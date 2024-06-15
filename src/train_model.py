@@ -26,6 +26,7 @@ def main(args):
     logger.info(f'Saved to {args.model}')
 
     r2 = linear_model.score(x_train, y_train)
+
     c = int(linear_model.coef_[0])
     inter = int(linear_model.intercept_)
 
