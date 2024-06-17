@@ -218,5 +218,5 @@ python src/predict_app.py
 2) В папке docs краткое описание разницы в работе development и production (gunicorn) серверов - [здесь](docs/report_3.md)
 3) Для запуска приложения используйте docker:
 ```sh
-docker run klantsova/pabd24:latest
+docker run -p 8000:8000 klantsova/pabd24:latest
 ```
