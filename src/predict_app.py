@@ -68,7 +68,7 @@ def predict(in_data: dict) -> int:
                             last_floor]])
     """
     area = int(in_data['area'])
-    price = predict_io_bounded(area)
+    price = predict_cpu_bounded(area, 50_000_000)
     return int(price)
 
 
