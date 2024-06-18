@@ -4,6 +4,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
+from.utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
 
 MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
@@ -32,7 +33,7 @@ def predict(in_data: dict) -> int:
     :raise Error: If something goes wrong.
     :return: House price, RUB.
     :rtype: int
-    """
+
     total_meters = float(in_data['total_meters'])
     floor = int(in_data['floor'])
     floors_count = int(in_data['floors_count'])
@@ -45,6 +46,9 @@ def predict(in_data: dict) -> int:
                             total_meters,
                             first_floor,
                             last_floor]])
+    """
+    area = float(in_data['area'])
+    price = predict_io_bounded(area)
     return int(price)
 
 
