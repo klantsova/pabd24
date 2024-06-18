@@ -4,7 +4,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
-from.utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
+from src.utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
 
 MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
