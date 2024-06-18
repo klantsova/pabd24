@@ -47,7 +47,7 @@ def predict(in_data: dict) -> int:
                             first_floor,
                             last_floor]])
     """
-    area = float(in_data['area'])
+    area = int(in_data['area'])
     price = predict_io_bounded(area)
     return int(price)
 
