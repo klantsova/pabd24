@@ -68,7 +68,7 @@ def predict(in_data: dict) -> int:
                             last_floor]])
     """
     area = int(in_data['area'])
-    price = predict_cpu_multithread(area, 45_000_000)
+    price = predict_cpu_multithread(area, 40_000_000)
     return int(price)
 
 
