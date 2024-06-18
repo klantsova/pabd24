@@ -4,7 +4,27 @@ from flask import Flask, request
 from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
-from src.utils import predict_io_bounded, predict_cpu_bounded, predict_cpu_multithread
+import time
+import numpy as np
+
+def predict_io_bounded(area):
+    """Emulate io delay"""
+    time.sleep(1)
+    avg_price = 200_000                 # RUB / m2
+    return int(area * avg_price)
+
+
+def predict_cpu_bounded(area, n=5_000_000):
+    """Emulate single thread computation"""
+    avg_price = sum([x for x in range(n)]) / n
+    return int(area * avg_price)
+
+
+def predict_cpu_multithread(area, n=5_000_000):
+    """Emulate multi thread computation"""
+    avg_price = np.mean(np.arange(n))
+    return int(area * avg_price)
+
 
 MODEL_SAVE_PATH = 'models/model_rf_BEST.joblib'
 
